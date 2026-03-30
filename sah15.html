@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Font Customization Tool</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 20px;
+        }
+
+        fieldset {
+            width: 300px;
+            margin-bottom: 15px;
+        }
+
+        legend {
+            font-weight: bold;
+        }
+
+        #textBox {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid black;
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Dynamic Font Customization Tool</h2>
+
+<fieldset>
+    <legend>Enter Text</legend>
+    <input type="text" id="inputText" placeholder="Type your text">
+</fieldset>
+
+<fieldset>
+    <legend>Font Size</legend>
+    <input type="range" id="fontSize" min="10" max="50" value="20" oninput="updateStyle()">
+</fieldset>
+
+<fieldset>
+    <legend>Color</legend>
+    <input type="color" id="textColor" oninput="updateStyle()">
+</fieldset>
+
+<fieldset>
+    <legend>Background Color</legend>
+    <input type="color" id="bgColor" oninput="updateStyle()">
+</fieldset>
+
+<div id="textBox">Your text will appear here</div>
+
+<script>
+    function updateStyle() {
+
+        var text = document.getElementById("inputText").value;
+        var fontSize = document.getElementById("fontSize").value;
+        var color = document.getElementById("textColor").value;
+        var bgColor = document.getElementById("bgColor").value;
+
+        var box = document.getElementById("textBox");
+
+        box.innerHTML = text;
+
+        box.style.fontSize = fontSize + "px";
+        box.style.color = color;
+        box.style.backgroundColor = bgColor;
+    }
+</script>
+
+</body>
+</html>
