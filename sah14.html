@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Styling App</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 20px;
+        }
+
+        fieldset {
+            width: 300px;
+            margin-bottom: 15px;
+        }
+
+        legend {
+            font-weight: bold;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        .smallcaps {
+            font-variant: small-caps;
+        }
+
+        .output {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        button {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Text Styling Application</h2>
+
+<fieldset>
+    <legend>Enter Message</legend>
+    <input type="text" id="msg" placeholder="Type your message">
+</fieldset>
+
+<fieldset>
+    <legend>Apply Styles</legend>
+    <button onclick="applyStyle('italic')">Italic</button>
+    <button onclick="applyStyle('bold')">Bold</button>
+    <button onclick="applyStyle('smallcaps')">Small Caps</button>
+    <button onclick="clearStyle()">Clear</button>
+</fieldset>
+
+<div id="output" class="output"></div>
+
+<script>
+    function applyStyle(styleClass) {
+
+        var text = document.getElementById("msg").value;
+        var output = document.getElementById("output");
+
+        output.innerHTML = text;
+
+        output.className = styleClass;
+    }
+
+    function clearStyle() {
+        var output = document.getElementById("output");
+        output.className = "output";
+    }
+</script>
+
+</body>
+</html>
+
