@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Information System</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 20px;
+        }
+
+        h2 {
+            color: darkblue;
+        }
+
+        form {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            width: 300px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: lightgray;
+        }
+
+        button {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Student Information System</h2>
+
+<form id="studentForm">
+    Name: <input type="text" id="name" required><br><br>
+    Age: <input type="number" id="age" required><br><br>
+    Email: <input type="email" id="email" required><br><br>
+
+    Gender:
+    <input type="radio" name="gender" value="Male"> Male
+    <input type="radio" name="gender" value="Female"> Female<br><br>
+
+    Course:
+    <select id="course">
+        <option value="CSE">CSE</option>
+        <option value="ECE">ECE</option>
+        <option value="EEE">EEE</option>
+    </select><br><br>
+
+    Skills:
+    <input type="checkbox" value="Java"> Java
+    <input type="checkbox" value="Python"> Python
+    <input type="checkbox" value="C++"> C++<br><br>
+
+    <button type="button" onclick="addStudent()">Add Student</button>
+    <button type="button" onclick="resetForm()">Reset</button>
+</form>
+
+<h3>Student Records</h3>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Course</th>
+            <th>Skills</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+</table>
+
+<script>
+    // Global array
+    var students = [];
+
+    function Student(name, age, email, gender, course, skills) {
+        this.name = name;
+        this.age = age;
+        this.email = email;
+        this.gender = gender;
+        this.course = course;
+        this.skills = skills;
+
+        this.getDetails = function() {
+            return this.name + " - " + this.course;
+        };
+    }
+
+    function addStudent() {
+
+        // Form handling
+        var form = document.getElementById("studentForm");
+
+        var name = document.getElementById("name").value;
+        var age = document.getElementById("age").value;
+        var email = document.getElementById("email").value;
+
+        var gender = document.querySelector('input[name="gender"]:checked');
+        gender = gender ? gender.value : "";
+
+        var course = document.getElementById("course").value;
+
+        // Get skills (array)
+        var skillNodes = document.querySelectorAll('input[type="checkbox"]:checked');
+        var skills = [];
+        skillNodes.forEach(function(s) {
+            skills.push(s.value);
+        });
+
+        
+        var student = new Student(name, age, email, gender, course, skills);
+
+        students.push(student);
+
+        
+        displayStudents();
+
+        form.reset();
+        document.getElementById("name").focus();
+    }
+
+    function displayStudents() {
+        var table = document.getElementById("tableBody");
+        table.innerHTML = "";
+
+        for (var i = 0; i < students.length; i++) {
+            var row = "<tr>" +
+                "<td>" + students[i].name + "</td>" +
+                "<td>" + students[i].age + "</td>" +
+                "<td>" + students[i].email + "</td>" +
+                "<td>" + students[i].gender + "</td>" +
+                "<td>" + students[i].course + "</td>" +
+                "<td>" + students[i].skills.join(", ") + "</td>" +
+                "</tr>";
+
+            table.innerHTML += row;
+        }
+    }
+
+    
+    function resetForm() {
+        var form = document.getElementById("studentForm");
+        form.reset();
+        document.getElementById("name").focus();
+    }
+</script>
+
+</body>
